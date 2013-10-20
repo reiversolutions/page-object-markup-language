@@ -1,0 +1,64 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:simpleType name="dataAttr">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="data-.*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="dataEnumer">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="id"/>
+			<xs:enumeration value="class"/>
+			<xs:enumeration value="css"/>
+			<xs:enumeration value="link"/>
+			<xs:enumeration value="name"/>
+			<xs:enumeration value="partial-link"/>
+			<xs:enumeration value="tag"/>
+			<xs:enumeration value="href"/>
+			<xs:enumeration value="xpath"/>
+			<xs:enumeration value="data-*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="typeClass">
+		<xs:union memberTypes="dataAttr dataEnumer"/>
+	</xs:simpleType>
+	<xs:element name="Pages">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Page" maxOccurs="unbounded" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Element" maxOccurs="unbounded" minOccurs="0">
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute type="xs:string" name="name" use="optional"/>
+											<xs:attribute type="xs:string" name="locator" use="optional"/>
+											<xs:attribute name="selector">
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:enumeration value="button"/>
+														<xs:enumeration value="checkbox"/>
+														<xs:enumeration value="image"/>
+														<xs:enumeration value="label"/>
+														<xs:enumeration value="link"/>
+														<xs:enumeration value="radio"/>
+														<xs:enumeration value="select"/>
+														<xs:enumeration value="table"/>
+														<xs:enumeration value="text"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:attribute>
+											<xs:attribute name="type" use="required" type="typeClass" />
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute type="xs:string" name="name" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute type="xs:string" name="group"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

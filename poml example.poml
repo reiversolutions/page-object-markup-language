@@ -1,0 +1,15 @@
+<Pages group="Website pages">
+	<Page name="Login">
+		<Element name="Username" locator="username" selector="text" type="id" />
+		<Element name="Password" locator="#password" selector="text" type="css" />
+		<Element name="Login" locator="login" selector="button" type="data-testId" />
+	</Page>
+	<Page>
+		<Element name="Picture link" locator="img" type="tag" />
+		<Element name="Company name" locator="#logoName" type="css" />
+	</Page>
+	<Page name="Picture">
+		<Element name="Picture" locator="img" selector="image" type="tag" />
+		<Element name="Picture description" locator="#logoName" selector="label" type="css" />
+	</Page>
+</Pages>
